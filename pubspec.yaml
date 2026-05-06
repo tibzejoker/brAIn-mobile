@@ -1,0 +1,48 @@
+name: brain_mobile
+description: brAIn mobile companion — joins a NATS broker to expose phone sensors, flash and TTS as bus topics.
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # NATS bus client (pub.dev: dart_nats — pure-Dart WebSocket+TCP NATS impl).
+  dart_nats: ^0.6.5
+
+  # Sensors: accelerometer / gyroscope / magnetometer / user accel.
+  sensors_plus: ^7.0.0
+
+  # Ambient light (Android only — sensors_plus has no light reader yet).
+  light_sensor: ^3.0.2
+
+  # Flashlight / torch.
+  torch_light: ^1.1.0
+
+  # Text-to-speech (per-platform native engine).
+  flutter_tts: ^4.2.5
+
+  # QR scanning (camera-based, native, no MLKit license headache).
+  mobile_scanner: ^7.2.0
+
+  # Local persistence — last broker URL/token, device id.
+  shared_preferences: ^2.5.5
+
+  # Stable device id (uuid v4 generated once, kept in prefs).
+  uuid: ^4.5.3
+
+  # Battery info (cheap, often-asked telemetry).
+  battery_plus: ^6.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
