@@ -1,18 +1,31 @@
-# Weekly dependency PRs — pub (Flutter/Dart) + github-actions. We
-# DON'T enable auto-merge here because dependabot PRs need a human
-# eyeball for breaking-change patches; review them when they land and
-# merge if clean. Group minor/patch into single PRs to cut review load.
+# Weekly dependency PRs — Flutter (pub) + GitHub Actions, minor + patch
+# grouped, MAJORS IGNORED.
+#
+# Why ignore majors: a Dependabot PR for `flutter_lints 4 → 6` or
+# `battery_plus 6 → 7` is breaking-by-definition (lint-set churn,
+# plugin API surface) and needs a deliberate human read of the
+# changelog. The grouped minor/patch PR still ships every Monday so
+# CVE / security patches arrive on autopilot.
 version: 2
 updates:
   - package-ecosystem: pub
     directory: /
     schedule: { interval: weekly, day: monday }
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     groups:
-      minor-and-patch:
+      pub-minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      - dependency-name: "*"
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: weekly, day: monday }
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2
+    groups:
+      actions-minor-and-patch:
+        update-types: [minor, patch]
+    ignore:
+      - dependency-name: "*"
+        update-types: [version-update:semver-major]
