@@ -1,0 +1,32 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel older runs on the same ref — Flutter setup + APK build is
+# ~5min, so killing stale runs when the user pushes a fix-up commit
+# matters for iteration speed.
+concurrency:
+  group: flutter-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # Single job — analyze + test + debug APK build. We don't upload
+    # the APK artifact: the goal here is just to prove the app still
+    # compiles on every push. Release builds go through a separate
+    # signed pipeline when we cut a tag.
+    name: analyze + test + build apk
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v3
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build apk --debug
