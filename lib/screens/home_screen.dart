@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             _StatusCard(bus: bus),
             const SizedBox(height: 16),
-            _SectionTitle('Sensors → bus'),
+            const _SectionTitle('Sensors → bus'),
             _SensorTile(
               title: 'Accelerometer',
               subtitle: 'mobile.<id>.sensor.accel · 10 Hz',
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
               onChanged: sensors.toggleBattery,
             ),
             const SizedBox(height: 16),
-            _SectionTitle('Remote control'),
+            const _SectionTitle('Remote control'),
             ListTile(
               leading: Icon(flash.isOn ? Icons.flashlight_on : Icons.flashlight_off),
               title: const Text('Flash'),
