@@ -37,7 +37,7 @@ dependencies:
   uuid: ^4.5.3
 
   # Battery info (cheap, often-asked telemetry).
-  battery_plus: ^6.0.2
+  battery_plus: ^7.0.0
 
 dev_dependencies:
   flutter_test:
